@@ -1,0 +1,292 @@
+<template>
+  <div class="breadcrumb-host">
+    <ul class="breadcrumb" :class="getClasses()">
+      <li v-for="item of menu" :key="item.title">
+        <a :href="item.link" v-if="item.link"><span :class="item.icon" class="icon" v-if="item.icon"></span>{{item.title}}</a>
+        <span class="static" v-if="!item.link"><span :class="item.icon" class="icon" v-if="item.icon"></span>{{item.title}}</span>
+        <span class="separator">{{separator}}</span>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['menu', 'separator', 'styles'],
+  name: 'breadcrumb',
+  methods: {
+    getClasses () {
+      return {
+        'custom-1': this.styles === 'custom1',
+        'custom-2': this.styles === 'custom2'
+      }
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+  @import '../../assets/sass/variable';
+
+  .breadcrumb-host {
+    display: block;
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 1.2rem;
+      list-style-type: none;
+      margin: 0;
+      background-color: transparent;
+      padding: 0;
+      @media #{$max767} {
+        font-size: 1rem;
+      }
+
+      li {
+        a {
+          color: #0275d8;
+        }
+        a,
+        .static {
+          .icon {
+            font-size: 1rem;
+            margin-right: 6px;
+
+            .rtl & {
+              margin-left: 6px;
+              margin-right: 0;
+            }
+          }
+        }
+        .separator {
+          color: rgba(#000,.4);
+          margin: 0 $module/2;
+        }
+        &:last-child {
+          .separator {
+            display: none;
+          }
+        }
+      }
+      &.custom-1 {
+        margin: -2px -7px;
+        @media #{$max767} {
+          margin-left: -2px;
+          margin-right: -2px;
+        }
+
+        li {
+          margin: 2px 7px;
+          @media #{$max767} {
+            margin-left: 2px;
+            margin-right: 2px;
+          }
+
+          a,
+          .static {
+            background: main-color(A100);
+            border-color: main-color(A100);
+            color: #fff;
+            display: inline-block;
+            height: 36px;
+            padding: 5px $module;
+            position: relative;
+            transition:
+            background .2s $animation,
+            color .2s $animation;
+            vertical-align: top;
+            @media #{$max767} {
+              height: auto;
+              padding: 2px ($module / 2);
+            }
+
+            &:before,
+            &:after {
+              border-style: solid;
+              border-color: transparent;
+              content: '';
+              display: block;
+              height: 0px;
+              position: absolute;
+              top: 0px;
+              transition: border-color .2s $animation;
+              width: 0px;
+              @media #{$max767} {
+                display: none;
+
+                .rtl & {
+                  display: none !important;
+                }
+              }
+            }
+            &:before {
+              border-width: 36px 10px 0 0;
+              border-right-color: inherit;
+              left: -10px;
+            }
+            &:after {
+              border-width: 0 0 36px 10px;
+              border-left-color: inherit;
+              right: -10px;
+            }
+          }
+          a {
+            &:hover {
+              background: #fff;
+              border-color: #fff;
+              color: main-color(A100);
+            }
+          }
+          .static {
+            opacity: .6;
+          }
+          .separator {
+            display: none;
+          }
+          &:first-child {
+            a,
+            .static {
+              &:before {
+                display: none;
+              }
+              .rtl & {
+                &:before {
+                  display: block;
+                }
+                &:after {
+                  display: none;
+                }
+              }
+            }
+          }
+          &:last-child {
+            a,
+            .static {
+              &:after {
+                display: none;
+              }
+              .rtl & {
+                &:before {
+                  display: none;
+                }
+                &:after {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+      &.custom-2 {
+        margin: -2px -7px;
+        @media #{$max767} {
+          margin-left: -2px;
+          margin-right: -2px;
+        }
+
+        li {
+          margin: 2px 7px;
+          @media #{$max767} {
+            margin-left: 2px;
+            margin-right: 2px;
+          }
+
+          a,
+          .static {
+            background: main-color(A100);
+            border-color: main-color(A100);
+            color: #fff;
+            display: inline-block;
+            height: 36px;
+            padding: 5px $module;
+            position: relative;
+            transition:
+            background .2s $animation,
+            color .2s $animation;
+            vertical-align: top;
+            @media #{$max767} {
+              height: auto;
+              padding: 2px ($module / 2);
+            }
+
+            &:before,
+            &:after {
+              border-style: solid;
+              border-color: transparent;
+              content: '';
+              display: block;
+              height: 0px;
+              position: absolute;
+              top: 0px;
+              transition: border-color .2s $animation;
+              width: 0px;
+              @media #{$max767} {
+                display: none;
+              }
+            }
+            &:before {
+              border-width: 18px 0 18px 10px;
+              border-top-color: inherit;
+              border-bottom-color: inherit;
+              left: -10px;
+
+              .rtl & {
+                border-style: solid;
+                border-color: transparent;
+                border-width: 18px 0 18px 10px;
+                border-left-color: inherit;
+                left: auto;
+                right: -10px;
+              }
+            }
+            &:after {
+              border-width: 18px 0 18px 10px;
+              border-left-color: inherit;
+              right: -10px;
+
+              .rtl & {
+                border-style: solid;
+                border-color: transparent;
+                border-width: 18px 0 18px 10px;
+                border-top-color: inherit;
+                border-bottom-color: inherit;
+                left: -10px;
+                right: auto;
+              }
+            }
+          }
+          a {
+            &:hover {
+              background: #fff;
+              border-color: #fff;
+              color: main-color(A100);
+            }
+          }
+          .static {
+            opacity: .6;
+          }
+          .separator {
+            display: none;
+          }
+          &:first-child {
+            a,
+            .static {
+              &:before {
+                display: none;
+              }
+            }
+          }
+          &:last-child {
+            a,
+            .static {
+              &:after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

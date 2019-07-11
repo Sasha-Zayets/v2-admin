@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+    <title>A2 admin</title>
+  </head>
+  <body class="rtl" dir="rtl">
+    <noscript>
+      <strong>We're sorry but admin-test doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+      let body = document.querySelector('body')
+      let over = document.createElement('div')
+      let loader = document.createElement('div')
+      loader.classList.add('loader')
+      loader.innerHTML = `<div class="dot"></div>
+                          <div class="dot"></div>
+                          <div class="dot"></div>
+                          <div class="dot"></div>
+                          <div class="dot"></div>`
+      over.classList.add('overlay')
+      //add
+      body.insertBefore(over, null)
+      body.insertBefore(loader, null)
+      let overlay = document.querySelector('.overlay')
+
+      document.addEventListener ('DOMContentLoaded', function () {
+        setTimeout(function () {
+          over.style.visibility = 'hidden'
+          loader.style.display = 'none'
+        }, 3000)
+      }, false)
+    </script>
+  </body>
+</html>

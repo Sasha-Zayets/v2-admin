@@ -1,0 +1,131 @@
+<template>
+  <v-app id="app">
+    <defalut-layout v-if="!extra()"></defalut-layout>
+    <extra-layout  v-if="extra()"></extra-layout>
+  </v-app>
+</template>
+
+<script>
+import defaulLayout from './components/defalut-layout/default-layout'
+import extraLayout from './components/extra-layout/extra-layout'
+export default {
+  name: 'App',
+  methods: {
+    extra () {
+      const rout = this.$route.path
+      let result = rout.indexOf('/extra-layout/')
+      if (result === 0) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  components: {
+    'defalut-layout': defaulLayout,
+    'extra-layout': extraLayout
+  }
+}
+</script>
+
+<style lang="scss">
+  @import 'assets/sass/variable';
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+  * {
+    outline: none;
+  }
+  .overlay {
+    background: #fff;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 998;
+  }
+  .loader {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    z-index: 999;
+
+    .dot {
+      animation: slide 1s infinite;
+      background: main-color(A400);
+      border-radius: 100%;
+      display: inline-block;
+      height: 24px;
+      width: 24px;
+
+      &:nth-child(1) {
+        animation-delay: 0.1s;
+        background: main-color(A100);
+      }
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+        background: main-color(900);
+      }
+      &:nth-child(3) {
+        animation-delay: 0.3s;
+        background: main-color(700);
+      }
+      &:nth-child(4) {
+        animation-delay: 0.4s;
+        background: main-color(500);
+      }
+      &:nth-child(5) {
+        animation-delay: 0.5s;
+        background: main-color(300);
+      }
+    }
+  }
+  @keyframes slide {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.3;
+      transform: scale(2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+#app {
+  height: 100%;
+}
+::-webkit-scrollbar {
+  width: 0.25em;
+  height: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2E3D50;
+}
+
+::-webkit-scrollbar-track {
+  background: #b8c0c8;
+}
+.theme--light.application {
+  background-color: #bbc2ce !important;
+}
+html, body {
+  height: 100%;
+}
+body {
+  font-family: 'Open Sans', sans-serif !important;
+  background-color: #bbc2ce !important;
+  scrollbar-face-color: #2E3D50;
+  scrollbar-track-color: #b8c0c8;
+}
+label {
+  margin-bottom: 0 !important;
+}
+button, select {
+  outline: none !important;
+}
+button:active {
+  outline: none !important;
+}
+</style>
